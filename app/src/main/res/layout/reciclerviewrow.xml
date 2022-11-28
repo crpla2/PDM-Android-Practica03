@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/textViewNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Nombre"
+        android:textColor="@color/purple_500" />
+
+    <TextView
+        android:id="@+id/textViewInstrumento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Instrumento"
+        android:textColor="@color/teal_200" />
+
+    <TextView
+        android:id="@+id/textViewPapel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/sumar"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="+" />
+
+    <Button
+        android:id="@+id/restar"
+        android:layout_width="51dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="-" />
+
+</LinearLayout>
