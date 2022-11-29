@@ -140,13 +140,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             if (view.getId() == botonrestar.getId()) {
                 if (num > 1) {
                     --num;
-                    mClicklistener.onItemClick(getMyTextName(),getMyTextPApel());
+                    mClicklistener.onItemClick(getMyTextName(),(String.valueOf(num)));
                 }
 
             } else {
                 if (num < 3) {
                     ++num;
-                    mClicklistener.onItemClick(getMyTextName(),getMyTextPApel());
+                    mClicklistener.onItemClick(getMyTextName(),(String.valueOf(num)));
                 }
             }
             setTextPApel(String.valueOf(num));
