@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Practica03</string>
+    <string name="musicos">Musicos</string>
+    <string name="clave_de_sol">Clave de sol</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="nombre">Nombre</string>
+    <string name="instrumento">Instrumento</string>
+    <string name="_1">1</string>
+    <string name="ordinal">º</string>
+    <string name="sube">sube</string>
+    <string name="baja">baja</string>
 </resources>

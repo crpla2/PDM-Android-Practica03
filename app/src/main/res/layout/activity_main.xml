@@ -11,14 +11,14 @@
         android:layout_width="319dp"
         android:layout_height="127dp"
         android:fontFamily="cursive"
-        android:text="Musicos"
+        android:text="@string/musicos"
         android:textSize="96sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.236" />
+        app:layout_constraintVertical_bias="0.24" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -30,6 +30,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/clave_sol" />
+        app:srcCompat="@drawable/clave_sol"
+        android:contentDescription="@string/clave_de_sol" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

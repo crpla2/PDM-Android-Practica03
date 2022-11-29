@@ -1,115 +1,101 @@
 package com.example.practica03;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * Clase Adaptador que gestiona el funcionamiento de cada uno de los elementos del ReciclerView
+ * hereda de ReciclerView
+ */
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
-    private ArrayList<Musico> lista;
-    private LayoutInflater mInflater;
-    private ItemClickListener mClicklistener;
-    private Context context;
+    private final ArrayList<Musico> lista;
+    private final ItemClickListener mClicklistener;
 
     /**
-     * Constructor
-     *
-     * @param context
-     * @param lista
+     * Constructor de la Clase
+     * @param mClicklistener Objeto de la clase ItemClickListener
+     * @param lista Objeto de tipo ArrayList de Musico
      */
-
-    public Adapter(Context context, ArrayList<Musico> lista,ItemClickListener mClicklistener) {
+    public Adapter(ArrayList<Musico> lista, ItemClickListener mClicklistener) {
         this.lista = lista;
-        this.context=context;
         this.mClicklistener=mClicklistener;
     }
 
     /**
-     * Inflar cada fila del xml cuando sea necesario
-     *
-     * @param parent
-     * @param viewType
-     * @return
+     * Metodo encargado de inflar cada fila del xml cuando sea necesario
+     * @param parent Objeto de tipo ViewGroup
+     * @param viewType  de tipo int
+     * @return devuelve un Objeto ViewHolder
      */
-    @NonNull
+
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.reciclerviewrow, parent, false);
         return new ViewHolder(view);
     }
 
     /**
-     * Enlaza los datos con el viewholder correspondiente
      *
-     * @param holder
-     * @param position
+     * Metodo que enlaza los datos con el viewholder correspondiente
+     * @param holder Objreto de tipo ViewHolder
+     * @param position de tipo int
      */
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder( ViewHolder holder, int position) {
         holder.setTextNombre(lista.get(position).getNombre());
         holder.setTextInstrumento(lista.get(position).getInstrumento());
-        holder.setTextPApel(String.valueOf(lista.get(position).getPapel()));
+        holder.setTextPapel(String.valueOf(lista.get(position).getPapel()));
     }
 
     /**
-     * devuelve cuantos elementos hay
-     *
-     * @return
+     * Metodo que devuelve cuantos elementos hay
+     * @return el numero de elementos de tipo int
      */
     @Override
     public int getItemCount() {
         return lista.size();
     }
 
-    /**** PARA EL LISTENER ****/
-
-
-    //La actividad padre implementa este metodo para responder a los elementos de clic
-    public void setClickListener(ItemClickListener itemClickListener) {
-        this.mClicklistener = itemClickListener;
-    }
-
-    //Permite capturar los eventos del clic
+    /**
+     * Interfaz que permite capturar los eventos del click
+     */
     public interface ItemClickListener {
         void onItemClick(String nombre,String papel);
     }
 
-    //METODOS AUXILIARES
-    Musico getItem(int pos) {
-        return lista.get(pos);
-    }
-
     /**
-     * Esta clase corresponde a cada fila
+     * Clase de tipo ViewHolder,  corresponde a cada fila
      * almacena y recicla las vistas según salen de la pantalla
      */
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView textViewNombre;
-        private TextView textViewInstrumento;
-        private TextView textViewPapel;
-        private Button botonsumar, botonrestar;
-        private int num;
+        private final TextView textViewNombre;
+        private final TextView textViewInstrumento;
+        private final TextView textViewPapel;
+        private final ImageButton botonsumar;
 
-        public ViewHolder(@NonNull View itemView) {
+        /**
+         * Constructor de la Clase ViewHolder
+         * @param itemView Objto de la Clase View
+         */
+        public ViewHolder(View itemView) {
             super(itemView);
             textViewNombre = itemView.findViewById(R.id.textViewNombre);
             textViewInstrumento = itemView.findViewById(R.id.textViewInstrumento);
             textViewPapel = itemView.findViewById(R.id.textViewPapel);
             botonsumar = itemView.findViewById(R.id.sumar);
-            botonrestar = itemView.findViewById(R.id.restar);
+            ImageButton botonrestar = itemView.findViewById(R.id.restar);
             botonrestar.setOnClickListener(this);
             botonsumar.setOnClickListener(this);
         }
-
+        //GETTERS Y SETTERS
         public void setTextNombre(String s) {
             textViewNombre.setText(s);
         }
@@ -122,34 +108,37 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             textViewInstrumento.setText(s);
         }
 
-        public String getMyTextInstrumento() {
-            return textViewInstrumento.getText().toString();
-        }
-
-        public void setTextPApel(String s) {
+        public void setTextPapel(String s) {
             textViewPapel.setText(s);
         }
-
-        public String getMyTextPApel() {
-            return textViewPapel.getText().toString();
-        }
-
+        /**
+         * Metodo que define el comportamiento de los botones dentro del ViewHolder
+         */
         @Override
         public void onClick(View view) {
-            num = Integer.parseInt(textViewPapel.getText().toString());
-            if (view.getId() == botonrestar.getId()) {
+            //Recogemos los datos del textView como int
+            int num = Integer.parseInt(textViewPapel.getText().toString());
+            //Comprobamos cual de los dos botones se ha pulsado
+            if (view.getId() == botonsumar.getId()) {
+                //Si el numero obtenido es mayor que 1
                 if (num > 1) {
+                    //restamos 1
                     --num;
+                    //Llamamos al metodo onclick de la interfaz pasandole los valores que recibiremos en el activity
                     mClicklistener.onItemClick(getMyTextName(),(String.valueOf(num)));
                 }
 
             } else {
+                //Si el numero es menor que 3
                 if (num < 3) {
+                    //sumamos 1
                     ++num;
+                    //Llamamos al metodo onclick de la interfaz pasandole los valores que recibiremos en el activity
                     mClicklistener.onItemClick(getMyTextName(),(String.valueOf(num)));
                 }
             }
-            setTextPApel(String.valueOf(num));
+            //Cambiamos el valor del textview
+            setTextPapel(String.valueOf(num));
         }
     }
 }
