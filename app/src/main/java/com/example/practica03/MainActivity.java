@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     }
     public void OnClick(View view){
         Intent intent= new Intent(this,ReciclerViewActivity.class);
-        intent.putExtra("numero",1);
         startActivity(intent);
     }
 }
